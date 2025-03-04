@@ -9,4 +9,4 @@ User-agent: ia_archiver
 Allow: /css/
 
 # Sitemap locations
-Sitemap: https://www.worldwidefestivals.net/sitemap.xml 
+Sitemap: https://www.covertsonline.com/sitemap.xml 
