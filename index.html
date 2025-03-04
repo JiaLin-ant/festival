@@ -47,10 +47,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="assets/textures/earth.jpg" as="image">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
 </head>
 <body>
     <div class="container">
         <header>
+            <div class="logo-container">
+                <a href="/">
+                    <img src="assets/images/logo.svg" alt="Coverts Online Logo" width="200" height="60">
+                </a>
+            </div>
             <h1>3D Festival Globe</h1>
             <p>Click on a country to see its festivals, or select a month to view all festivals in that month</p>
         </header>
@@ -194,5 +200,16 @@
     <script src="js/festivals.js"></script>
     <script src="js/globe.js"></script>
     <script src="js/main.js"></script>
+    <div style="display: none;">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W2VH0XCCS5"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-W2VH0XCCS5');
+    </script>
+</div>
 </body>
 </html> 

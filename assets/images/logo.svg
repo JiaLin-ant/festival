@@ -1,0 +1,53 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景渐变 -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e" />
+      <stop offset="100%" stop-color="#16213e" />
+    </linearGradient>
+    <linearGradient id="globeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3399ff" />
+      <stop offset="100%" stop-color="#33cc33" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4d4d" />
+      <stop offset="50%" stop-color="#ffcc00" />
+      <stop offset="100%" stop-color="#ff4d4d" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="200" height="60" rx="10" fill="url(#logoGradient)" />
+  
+  <!-- 地球图标 -->
+  <g transform="translate(25, 30) scale(0.8)">
+    <!-- 地球轮廓 -->
+    <circle cx="0" cy="0" r="20" fill="url(#globeGradient)" />
+    
+    <!-- 经纬线 -->
+    <path d="M -20 0 Q -10 15, 0 0 T 20 0" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.6" />
+    <path d="M -20 0 Q -10 -15, 0 0 T 20 0" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.6" />
+    <path d="M 0 -20 Q 15 -10, 0 0 T 0 20" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.6" />
+    <path d="M 0 -20 Q -15 -10, 0 0 T 0 20" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.6" />
+    
+    <!-- 赤道 -->
+    <ellipse cx="0" cy="0" rx="20" ry="7" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.8" />
+    
+    <!-- 庆祝图标 - 星星 -->
+    <path d="M 10 -5 L 11 -2 L 14 -2 L 12 0 L 13 3 L 10 1 L 7 3 L 8 0 L 6 -2 L 9 -2 Z" fill="#ffcc00" />
+    <path d="M -12 8 L -11 10 L -9 10 L -10 12 L -9 14 L -12 13 L -15 14 L -14 12 L -16 10 L -13 10 Z" fill="#ffcc00" />
+  </g>
+  
+  <!-- 文字部分 -->
+  <g transform="translate(60, 35)">
+    <text font-family="Arial, sans-serif" font-weight="bold" font-size="18" fill="url(#textGradient)">Coverts</text>
+    <text x="0" y="18" font-family="Arial, sans-serif" font-size="12" fill="#ffffff">ONLINE</text>
+  </g>
+  
+  <!-- 装饰元素 - 节日旗帜 -->
+  <g transform="translate(170, 15)">
+    <path d="M 0 0 L 0 30" stroke="#ffffff" stroke-width="1.5" />
+    <path d="M 0 5 L 15 10 L 0 15" fill="#ff4d4d" />
+    <path d="M 0 15 L 15 20 L 0 25" fill="#ffcc00" />
+  </g>
+</svg> 
