@@ -1,0 +1,522 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    background: linear-gradient(45deg, #ff4d4d, #ffcc00, #33cc33, #3399ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: #aaaaaa;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.date-control, .filter-control {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+button, select, input[type="date"] {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #555555;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+button:hover, select:hover {
+    background-color: #444444;
+}
+
+#globe-container {
+    position: relative;
+    margin-top: 20px;
+    width: 100%;
+    height: calc(100vh - 100px);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+#festival-info {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+#festival-info.hidden {
+    display: none !important;
+}
+
+#festival-info > div {
+    position: relative;
+    background: linear-gradient(145deg, #1e1e2f, #2d2d44);
+    padding: 35px;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transform: translateY(0);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#close-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#close-info:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1) rotate(90deg);
+}
+
+#festival-title {
+    color: #ffcc00;
+    font-size: 28px;
+    margin-bottom: 25px;
+    padding-right: 40px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid rgba(255, 204, 0, 0.3);
+    padding-bottom: 15px;
+}
+
+#festival-date, #festival-location, #festival-category {
+    color: #bbb;
+    margin-bottom: 15px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+#festival-date:before, #festival-location:before, #festival-category:before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#festival-date:before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23bbb"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7v-5z"/></svg>');
+}
+
+#festival-location:before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23bbb"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>');
+}
+
+#festival-category:before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23bbb"><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/></svg>');
+}
+
+#festival-description {
+    color: #fff;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #ffcc00;
+}
+
+#festival-images {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+#festival-images img {
+    width: 100%;
+    max-width: 150px;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+    }
+    
+    #globe-container {
+        height: 50vh;
+    }
+}
+
+.label-toggle {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    color: #aaaaaa;
+}
+
+.label-toggle input {
+    margin-right: 5px;
+}
+
+.country-label {
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    user-select: none;
+    transform-origin: center center;
+    position: absolute !important;
+    z-index: 1000 !important;
+    pointer-events: auto !important;
+    display: none; /* 初始隐藏，由JS控制显示 */
+    font-weight: bold !important;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,1), -1px -1px 2px rgba(0,0,0,1), 
+                 1px -1px 2px rgba(0,0,0,1), -1px 1px 2px rgba(0,0,0,1);
+    padding: 4px 10px !important;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.country-label:hover {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: #000 !important;
+    text-shadow: none;
+    box-shadow: 0 2px 8px rgba(255,255,255,0.5);
+    transform: scale(1.1);
+}
+
+/* 添加滚动条样式 */
+#festival-info > div::-webkit-scrollbar {
+    width: 8px;
+}
+
+#festival-info > div::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+#festival-info > div::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+#festival-info > div::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 添加 .hidden 类的定义 */
+.hidden {
+    display: none !important;
+}
+
+.top-controls {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: auto;
+    max-width: 300px;
+}
+
+@media (max-width: 768px) {
+    .top-controls {
+        position: relative;
+        left: 0;
+        top: 0;
+        margin-bottom: 20px;
+    }
+}
+
+.month-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.month-selector label {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.month-selector select {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #555555;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    width: 150px;
+}
+
+.month-selector select:hover {
+    background-color: #444444;
+}
+
+/* 修改节日信息面板样式以适应月度视图 */
+#festival-info .monthly-view {
+    display: grid;
+    gap: 25px;
+}
+
+.country-festivals {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 20px;
+    margin-bottom: 5px;
+}
+
+.country-festivals h3 {
+    color: #3399ff;
+    margin-bottom: 15px;
+    font-size: 20px;
+    display: inline-block;
+    padding: 5px 15px;
+    background: rgba(51, 153, 255, 0.1);
+    border-radius: 20px;
+}
+
+.country-festivals:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.festival-item {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-left: 4px solid #ffcc00;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0 8px 8px 0;
+    transition: all 0.2s ease;
+}
+
+.festival-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.festival-item strong {
+    color: #ffcc00;
+    font-size: 17px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.festival-item .category {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(255, 204, 0, 0.2);
+    border-radius: 12px;
+    font-size: 12px;
+    color: #ffcc00;
+    margin: 5px 0 10px;
+}
+
+/* 页脚样式 */
+footer {
+    background: linear-gradient(to bottom, #1a1a2e, #121212);
+    padding: 40px 0 20px;
+    margin-top: 50px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-section h3 {
+    color: #ffcc00;
+    margin-bottom: 15px;
+    font-size: 18px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-section h3:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: rgba(255, 204, 0, 0.5);
+}
+
+.footer-section p {
+    color: #aaa;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 14px;
+}
+
+.footer-section ul li a:hover {
+    color: #ffcc00;
+    text-decoration: underline;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.copyright p {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.copyright a {
+    color: #999;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.copyright a:hover {
+    color: #ffcc00;
+}
+
+/* 添加响应式设计 */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-section {
+        margin-bottom: 20px;
+    }
+}
+
+/* 添加无障碍支持 */
+a:focus, button:focus, select:focus {
+    outline: 2px solid #ffcc00;
+    outline-offset: 2px;
+}
+
+/* 添加打印样式 */
+@media print {
+    #globe-container, .controls, .top-controls {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    header, footer, #festival-info {
+        background: none !important;
+        color: black !important;
+    }
+    
+    a {
+        color: black !important;
+        text-decoration: underline;
+    }
+}
+
+/* 添加加载状态样式 */
+.globe-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #ffcc00;
+}
+
+.globe-loading:after {
+    content: "Loading Worldwide Festivals Globe...";
+    display: block;
+    margin-top: 10px;
+} 

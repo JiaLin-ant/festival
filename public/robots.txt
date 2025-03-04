@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: /js/
+Disallow: /css/
+
+# Allow CSS for web archives
+User-agent: ia_archiver
+Allow: /css/
+
+# Sitemap locations
+Sitemap: https://www.worldwidefestivals.net/sitemap.xml 
