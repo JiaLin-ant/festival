@@ -64,12 +64,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// 添加页面标题动态更新，强化关键词
+// 添加按类别过滤功能
+function filterByCategory(category) {
+    document.title = `${category} Festivals Around the World - Global Festivals Explorer`;
+    // 实现过滤逻辑
+    console.log(`Filtering by ${category} festivals`);
+    // 这里可以添加实际的过滤功能
+}
+
+// 更新页面标题函数
 function updatePageTitle(country, festival) {
     if (country && festival) {
-        document.title = `${festival} in ${country} - Worldwide Festivals Explorer`;
+        document.title = `${festival} - ${country} Festival | Global Festivals Explorer`;
     } else {
-        document.title = "Worldwide Festivals - Explore Cultural Celebrations Around the Globe";
+        document.title = "Global Festivals Explorer - Discover Cultural Celebrations Worldwide";
     }
 }
 

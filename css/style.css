@@ -535,4 +535,71 @@ a:focus, button:focus, select:focus {
     .logo-container img {
         width: 150px;
     }
+}
+
+.intro-section {
+    background: rgba(0,0,0,0.3);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border-left: 4px solid #ffcc00;
+}
+
+.intro-section h2 {
+    color: #ffcc00;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.intro-section p {
+    line-height: 1.6;
+    color: #eee;
+}
+
+.related-articles {
+    margin-top: 40px;
+    padding: 30px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.related-articles h3 {
+    color: #ffcc00;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.article-card {
+    background: rgba(0,0,0,0.3);
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    background: rgba(0,0,0,0.4);
+}
+
+.article-card h4 {
+    color: #ffcc00;
+    margin-bottom: 10px;
+}
+
+.article-card a {
+    display: inline-block;
+    margin-top: 15px;
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.article-card a:hover {
+    text-decoration: underline;
 } 
