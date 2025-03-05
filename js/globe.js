@@ -447,6 +447,22 @@ class Globe {
             }
         };
         
+        // 在加载完国家数据后，为每个节日创建标记
+        for (const countryName in this.countries) {
+            const country = this.countries[countryName];
+            const { lat, lon } = country.center;
+            
+            // 为每个节日创建标记
+            country.festivals.forEach(festival => {
+                // 计算节日位置（可以稍微偏移国家中心位置以避免重叠）
+                const festivalLat = lat + (Math.random() - 0.5) * 5;
+                const festivalLon = lon + (Math.random() - 0.5) * 5;
+                
+                // 添加标记
+                this.addMarker(festivalLat, festivalLon, festival, countryName);
+            });
+        }
+        
         // 只有当地球对象存在时才添加国家标记
         if (this.earth) {
             this.addCountryMarkers();
@@ -664,27 +680,33 @@ class Globe {
         }
     }
     
-    // 处理地球点击
+    // 修复 onGlobeClick 方法，保留国家点击功能
     onGlobeClick(event) {
         // 计算鼠标位置
         const rect = this.renderer.domElement.getBoundingClientRect();
         this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
         this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
         
-        // 射线检测
+        // 设置射线
         this.raycaster.setFromCamera(this.mouse, this.camera);
         
-        // 首先检查是否点击了节日标记或国家标记
-        const markerIntersects = this.raycaster.intersectObjects(this.markerObjects, true);
+        // 首先检查是否点击了节日标记
+        const markerIntersects = this.raycaster.intersectObjects(this.markerObjects);
         if (markerIntersects.length > 0) {
-            const object = markerIntersects[0].object;
-            console.log('Clicked object:', object);
-            
-            if (object.userData.festival) {
-                // 显示节日信息
-                this.showFestivalInfo(object.userData.festival);
+            const marker = markerIntersects[0].object;
+            if (marker.userData.festival) {
+                // 调用标记点击处理方法
+                this.onMarkerClick(marker, marker.userData.festival);
                 return;
             }
+        }
+        
+        // 如果没有点击节日标记，检查是否点击了国家标记或地球
+        // 首先检查是否点击了节日标记或国家标记
+        const allIntersects = this.raycaster.intersectObjects(this.scene.children, true);
+        for (const intersect of allIntersects) {
+            const object = intersect.object;
+            
             if (object.userData.country) {
                 // 显示国家节日信息
                 console.log('Clicked country:', object.userData.country);
@@ -736,7 +758,7 @@ class Globe {
         }
     }
     
-    // 改进距离计算，使用哈弗辛公式计算球面距离
+    // 恢复距离计算函数
     calculateDistance(lat1, lon1, lat2, lon2) {
         // 转换为弧度
         const lat1Rad = lat1 * Math.PI / 180;
@@ -790,28 +812,59 @@ class Globe {
     // 显示节日信息
     showFestivalInfo(festival) {
         const infoPanel = document.getElementById('festival-info');
-        const titleElement = document.getElementById('festival-title');
-        const dateElement = document.getElementById('festival-date');
-        const locationElement = document.getElementById('festival-location');
-        const categoryElement = document.getElementById('festival-category');
-        const descriptionElement = document.getElementById('festival-description');
         
-        titleElement.textContent = festival.name;
-        dateElement.textContent = `Date: ${festival.date || 'Unknown'}`;
-        locationElement.textContent = `Location: ${festival.location}`;
+        // 创建 slug 用于链接
+        const festivalSlug = festival.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
         
-        let categoryText = '';
-        switch(festival.category) {
-            case 'religious': categoryText = 'Religious Festival'; break;
-            case 'national': categoryText = 'National Festival'; break;
-            case 'cultural': categoryText = 'Cultural Festival'; break;
-            case 'international': categoryText = 'International Festival'; break;
-        }
-        
-        categoryElement.textContent = `Category: ${categoryText}`;
-        descriptionElement.textContent = festival.description;
+        infoPanel.innerHTML = `
+            <div>
+                <button id="close-info">&times;</button>
+                <h2 id="festival-title">${festival.name}</h2>
+                
+                <div class="festival-info-grid">
+                    <div class="info-item">
+                        <i class="fas fa-calendar"></i>
+                        <div>
+                            <div class="label">Date</div>
+                            <div class="value">${festival.date}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <div class="label">Location</div>
+                            <div class="value">${festival.location || 'Various locations'}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-tag"></i>
+                        <div>
+                            <div class="label">Category</div>
+                            <div class="value">${festival.category}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="festival-description">
+                    ${festival.description}
+                </div>
+                
+                <div class="festival-actions">
+                    <a href="festivals/${festivalSlug}.html" class="detail-link">
+                        <i class="fas fa-external-link-alt"></i> View Full Details
+                    </a>
+                </div>
+            </div>
+        `;
         
         infoPanel.classList.remove('hidden');
+        
+        // 重新添加关闭事件监听
+        document.getElementById('close-info').addEventListener('click', () => {
+            infoPanel.classList.add('hidden');
+        });
     }
     
     // 添加新方法：显示位置信息
@@ -1158,6 +1211,79 @@ class Globe {
         
         animate();
     }
+
+    // 修改标记点击事件，直接跳转到详情页面
+    onMarkerClick(marker, festival) {
+        // 创建 slug 用于链接
+        const festivalSlug = festival.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+        
+        // 直接跳转到详情页面
+        window.location.href = `festivals/${festivalSlug}.html`;
+    }
+
+    // 在 Globe 类中添加或修改 addMarker 方法
+    addMarker(lat, lon, festival, countryName) {
+        // 将经纬度转换为3D坐标
+        const phi = (90 - lat) * Math.PI / 180;
+        const theta = (lon + 180) * Math.PI / 180;
+        
+        const x = -Math.sin(phi) * Math.cos(theta) * 2;
+        const y = Math.cos(phi) * 2;
+        const z = Math.sin(phi) * Math.sin(theta) * 2;
+        
+        // 创建标记几何体和材质
+        const markerGeometry = new THREE.SphereGeometry(0.03, 16, 16);
+        const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        
+        // 创建标记网格
+        const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+        marker.position.set(x, y, z);
+        
+        // 存储标记相关信息
+        marker.userData = {
+            festival: festival,
+            country: countryName
+        };
+        
+        // 将标记添加到地球
+        this.earth.add(marker);
+        this.markerObjects.push(marker);
+        
+        // 返回标记对象
+        return marker;
+    }
+
+    // 添加一个直接跳转到节日详情页的方法
+    showFestivalDetails(festivalName, countryName) {
+        // 在所有国家中查找指定的节日
+        let festival = null;
+        
+        if (countryName && this.countries[countryName]) {
+            // 如果指定了国家，只在该国家中查找
+            festival = this.countries[countryName].festivals.find(f => 
+                f.name.toLowerCase() === festivalName.toLowerCase()
+            );
+        } else {
+            // 否则在所有国家中查找
+            for (const country in this.countries) {
+                const found = this.countries[country].festivals.find(f => 
+                    f.name.toLowerCase() === festivalName.toLowerCase()
+                );
+                if (found) {
+                    festival = found;
+                    break;
+                }
+            }
+        }
+        
+        if (festival) {
+            // 创建 slug 用于链接
+            const festivalSlug = festival.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+            
+            // 直接跳转到详情页面
+            window.location.href = `festivals/${festivalSlug}.html`;
+        }
+    }
 }
 
 // 全局函数，用于从页面其他部分调用
@@ -1173,4 +1299,10 @@ function showFestival(country, festivalName) {
     
     // 更新页面标题
     document.title = `${festivalName} in ${country} - Worldwide Festivals Explorer`;
+}
+
+// 添加到全局函数部分
+function showFestivalDetails(festivalName, countryName) {
+    const globeInstance = document.querySelector('#globe-container').__globe;
+    globeInstance.showFestivalDetails(festivalName, countryName);
 } 

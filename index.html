@@ -49,6 +49,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="assets/textures/earth.jpg" as="image">
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -92,32 +93,6 @@
                 <div id="festival-description"></div>
             </div>
         </div>
-        
-        <div class="globe-instructions">
-          <h3>How to Use Our Worldwide Festivals Globe</h3>
-          <ul>
-            <li><strong>Rotate:</strong> Click and drag to rotate the globe and explore different regions</li>
-            <li><strong>Zoom:</strong> Use mouse wheel or pinch gesture to zoom in/out</li>
-            <li><strong>Select:</strong> Click on any country to discover its festivals</li>
-            <li><strong>Filter:</strong> Use the month selector to see worldwide festivals for a specific month</li>
-          </ul>
-        </div>
-        
-        <div class="share-container">
-          <h3>Share This Worldwide Festivals Globe</h3>
-          <div class="share-buttons">
-            <a href="https://twitter.com/intent/tweet?url=https://www.covertsonline.com&text=Explore worldwide festivals with this interactive 3D globe!" target="_blank" rel="noopener" aria-label="Share on Twitter">
-              <i class="fa fa-twitter"></i> Twitter
-            </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.covertsonline.com" target="_blank" rel="noopener" aria-label="Share on Facebook">
-              <i class="fa fa-facebook"></i> Facebook
-            </a>
-            <a href="https://www.pinterest.com/pin/create/button/?url=https://www.covertsonline.com&media=https://www.covertsonline.com/assets/images/og-image.jpg&description=Interactive 3D globe of worldwide festivals and cultural celebrations" target="_blank" rel="noopener" aria-label="Share on Pinterest">
-              <i class="fa fa-pinterest"></i> Pinterest
-            </a>
-          </div>
-        </div>
-    </div>
     
     <footer>
         <div class="container">
@@ -130,9 +105,9 @@
                 <div class="footer-section">
                     <h3>Popular Festivals</h3>
                     <ul>
-                        <li><a href="#" onclick="showFestival('China', 'Spring Festival')">Chinese Spring Festival</a></li>
-                        <li><a href="#" onclick="showFestival('India', 'Diwali')">Indian Diwali</a></li>
-                        <li><a href="#" onclick="showFestival('Brazil', 'Rio Carnival')">Rio Carnival</a></li>
+                        <li><a href="javascript:showFestivalDetails('Spring Festival', 'China')">Chinese Spring Festival</a></li>
+                        <li><a href="javascript:showFestivalDetails('Diwali', 'India')">Indian Diwali</a></li>
+                        <li><a href="javascript:showFestivalDetails('Carnival', 'Brazil')">Rio Carnival</a></li>
                         <li><a href="#" onclick="showFestival('Mexico', 'Day of the Dead')">Day of the Dead</a></li>
                         <li><a href="#" onclick="showFestival('Japan', 'Hanami')">Japanese Cherry Blossom Festival</a></li>
                     </ul>
@@ -160,93 +135,8 @@
                     </ul>
                 </div>
             </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 CoverstsOnline.com - All Rights Reserved</p>
-                <p>
-                    <a href="/about.html">About</a> | 
-                    <a href="/contact.html">Contact</a> | 
-                    <a href="/privacy-policy.html">Privacy Policy</a> | 
-                    <a href="/terms-of-service.html">Terms of Service</a>
-                </p>
-            </div>
         </div>
     </footer>
-    
-    <div class="faq-section">
-      <h2>Frequently Asked Questions About Worldwide Festivals</h2>
-      
-      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <h3 itemprop="name">How can I navigate the worldwide festivals globe?</h3>
-        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>You can navigate our interactive 3D globe by clicking and dragging to rotate it, using the mouse wheel to zoom in and out, and clicking on any country to see its festivals. You can also use the month selector to view festivals happening in a specific month around the world.</p>
-          </div>
-        </div>
-      </div>
-      
-      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <h3 itemprop="name">What types of worldwide festivals are included?</h3>
-        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>Our database includes a wide variety of worldwide festivals, including cultural celebrations, religious events, traditional holidays, and modern festivals. Each country features at least one significant festival for every month of the year, providing a comprehensive view of global celebrations.</p>
-          </div>
-        </div>
-      </div>
-      
-      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <h3 itemprop="name">How often is the worldwide festivals database updated?</h3>
-        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>We update our worldwide festivals database regularly to ensure accuracy of dates and information. Major festivals are reviewed annually, and we continuously add new celebrations and cultural events as we expand our coverage of global festivities.</p>
-          </div>
-        </div>
-      </div>
-
-      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <h3 itemprop="name">What are the most popular festivals around the world?</h3>
-        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>Some of the most popular festivals around the world include the Rio Carnival in Brazil, Chinese New Year, India's Diwali Festival of Lights, Mexico's Day of the Dead, Germany's Oktoberfest, Spain's La Tomatina, Thailand's Songkran Water Festival, and the Holi Festival of Colors. Our interactive globe allows you to explore these festivals and many more lesser-known but equally fascinating celebrations.</p>
-          </div>
-        </div>
-      </div>
-
-      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <h3 itemprop="name">How can I find festivals happening during my travel dates?</h3>
-        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>You can easily find festivals happening during your travel dates by using our month selector to view all global festivals in a specific month. Additionally, you can click on your destination country on the interactive globe to see all festivals celebrated there throughout the year, helping you plan your trip around these cultural experiences.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="intro-section">
-      <h2>Explore Festivals Around the World</h2>
-      <p>Welcome to the ultimate festival resource. Our interactive 3D globe lets you discover cultural festivals, religious celebrations, and traditional events from every corner of the world. From vibrant carnivals to solemn religious observances, explore the rich tapestry of global festivals throughout the year.</p>
-    </div>
-    
-    <div class="related-articles">
-      <h3>Festival Guides & Articles</h3>
-      <div class="article-grid">
-        <div class="article-card">
-          <h4>Top 10 Must-See Festivals Around the World</h4>
-          <p>Discover the most spectacular and culturally significant festivals that should be on every traveler's bucket list.</p>
-          <a href="/articles/top-festivals.html">Read More</a>
-        </div>
-        <div class="article-card">
-          <h4>Seasonal Festival Guide: What to Experience Each Month</h4>
-          <p>A month-by-month guide to the best festivals happening around the world throughout the year.</p>
-          <a href="/articles/seasonal-festivals.html">Read More</a>
-        </div>
-        <div class="article-card">
-          <h4>Religious Festivals Explained: Traditions and Meanings</h4>
-          <p>Understanding the cultural and spiritual significance behind major religious festivals worldwide.</p>
-          <a href="/articles/religious-festivals.html">Read More</a>
-        </div>
-      </div>
-    </div>
     
     <script src="js/festivals.js"></script>
     <script src="js/globe.js"></script>

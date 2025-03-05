@@ -6,9 +6,10 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #121212;
-    color: #ffffff;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    color: #e2e8f0;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 .container {
@@ -24,17 +25,19 @@ header {
 }
 
 header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 5px;
-    background: linear-gradient(45deg, #ff4d4d, #ffcc00, #33cc33, #3399ff);
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, #38bdf8, #818cf8, #c084fc);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    text-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
 }
 
 header p {
     font-size: 1.2rem;
-    color: #aaaaaa;
+    color: #94a3b8;
+    line-height: 1.6;
 }
 
 .controls {
@@ -51,17 +54,22 @@ header p {
 }
 
 button, select, input[type="date"] {
-    background-color: #333333;
-    color: #ffffff;
-    border: 1px solid #555555;
-    padding: 8px 15px;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
 }
 
 button:hover, select:hover {
-    background-color: #444444;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
 }
 
 #globe-container {
@@ -89,68 +97,80 @@ button:hover, select:hover {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #festival-info.hidden {
-    display: none !important;
+    opacity: 0;
+    visibility: hidden;
 }
 
 #festival-info > div {
     position: relative;
-    background: linear-gradient(145deg, #1e1e2f, #2d2d44);
-    padding: 35px;
-    border-radius: 20px;
-    max-width: 700px;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(30, 27, 75, 0.95) 100%);
+    padding: 40px;
+    border-radius: 24px;
+    max-width: 800px;
     width: 90%;
     max-height: 85vh;
     overflow-y: auto;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    transform: translateY(0);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    animation: fadeIn 0.4s ease;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    transform: scale(1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: cardAppear 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes cardAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 #close-info {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
     border: none;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 #close-info:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: scale(1.1) rotate(90deg);
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
 }
 
 #festival-title {
-    color: #ffcc00;
-    font-size: 28px;
-    margin-bottom: 25px;
-    padding-right: 40px;
+    color: #38bdf8;
+    font-size: 32px;
+    margin-bottom: 30px;
+    padding-right: 50px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    border-bottom: 2px solid rgba(255, 204, 0, 0.3);
-    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(255, 204, 0, 0.2);
+    padding-bottom: 20px;
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
 }
 
 #festival-date, #festival-location, #festival-category {
@@ -186,25 +206,90 @@ button:hover, select:hover {
 #festival-description {
     color: #fff;
     line-height: 1.8;
-    margin-bottom: 25px;
+    margin: 30px 0;
     font-size: 16px;
     background: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 12px;
+    padding: 25px;
+    border-radius: 16px;
     border-left: 4px solid #ffcc00;
+    position: relative;
+    overflow: hidden;
+}
+
+#festival-description::before {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 60px;
+    color: rgba(255, 204, 0, 0.1);
+    font-family: serif;
 }
 
 #festival-images {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
 }
 
-#festival-images img {
+.festival-image {
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 16/9;
+}
+
+.festival-image img {
     width: 100%;
-    max-width: 150px;
-    border-radius: 4px;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.festival-image:hover img {
+    transform: scale(1.1);
+}
+
+.festival-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.info-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+.info-item i {
+    color: #38bdf8;
+    font-size: 24px;
+}
+
+.info-item .label {
+    font-size: 12px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-item .value {
+    color: #e2e8f0;
+    font-size: 16px;
+    margin-top: 4px;
 }
 
 @media (max-width: 768px) {
@@ -214,6 +299,21 @@ button:hover, select:hover {
     
     #globe-container {
         height: 50vh;
+    }
+
+    #festival-info > div {
+        padding: 25px;
+        width: 95%;
+    }
+
+    #festival-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .festival-info-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
 }
 
@@ -256,20 +356,20 @@ button:hover, select:hover {
 /* 添加滚动条样式 */
 #festival-info > div::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
 #festival-info > div::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
 }
 
 #festival-info > div::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+    background: rgba(56, 189, 248, 0.3);
+    border-radius: 4px;
 }
 
 #festival-info > div::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(56, 189, 248, 0.5);
 }
 
 /* 添加 .hidden 类的定义 */
@@ -279,50 +379,78 @@ button:hover, select:hover {
 
 .top-controls {
     position: absolute;
+    top: 20px;
     left: 20px;
-    top: 10px;
-    z-index: 100;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: auto;
-    max-width: 300px;
-}
-
-@media (max-width: 768px) {
-    .top-controls {
-        position: relative;
-        left: 0;
-        top: 0;
-        margin-bottom: 20px;
-    }
+    z-index: 10;
 }
 
 .month-selector {
-    display: flex;
-    flex-direction: column;
+    background: rgba(15, 23, 42, 0.8);
+    padding: 12px 15px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
     gap: 10px;
 }
 
 .month-selector label {
-    color: #aaa;
-    font-size: 14px;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 .month-selector select {
-    background-color: #333333;
-    color: #ffffff;
-    border: 1px solid #555555;
-    padding: 8px 15px;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 30px 8px 12px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 0.9rem;
-    width: 150px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.5L6 8L9.5 4.5' stroke='%2394a3b8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    min-width: 180px;
 }
 
 .month-selector select:hover {
-    background-color: #444444;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.month-selector select:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .top-controls {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 20px;
+    }
+
+    .month-selector {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .month-selector select {
+        width: 100%;
+        min-width: unset;
+    }
 }
 
 /* 修改节日信息面板样式以适应月度视图 */
@@ -386,10 +514,9 @@ button:hover, select:hover {
 
 /* 页脚样式 */
 footer {
-    background: linear-gradient(to bottom, #1a1a2e, #121212);
-    padding: 40px 0 20px;
-    margin-top: 50px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(0deg, rgba(15, 23, 42, 0.9) 0%, transparent 100%);
+    padding: 40px 0;
+    margin-top: 60px;
 }
 
 .footer-content {
@@ -400,11 +527,11 @@ footer {
 }
 
 .footer-section h3 {
-    color: #ffcc00;
+    color: #38bdf8;
     margin-bottom: 15px;
     font-size: 18px;
     position: relative;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 .footer-section h3:after {
@@ -414,11 +541,11 @@ footer {
     left: 0;
     width: 50px;
     height: 2px;
-    background: rgba(255, 204, 0, 0.5);
+    background: linear-gradient(90deg, #38bdf8, transparent);
 }
 
 .footer-section p {
-    color: #aaa;
+    color: #94a3b8;
     line-height: 1.6;
     font-size: 14px;
 }
@@ -433,15 +560,16 @@ footer {
 }
 
 .footer-section ul li a {
-    color: #aaa;
+    color: #94a3b8;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
     font-size: 14px;
 }
 
 .footer-section ul li a:hover {
-    color: #ffcc00;
-    text-decoration: underline;
+    color: #38bdf8;
+    text-decoration: none;
+    padding-left: 5px;
 }
 
 .copyright {
@@ -538,15 +666,15 @@ a:focus, button:focus, select:focus {
 }
 
 .intro-section {
-    background: rgba(0,0,0,0.3);
+    background: rgba(255, 255, 255, 0.03);
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 25px;
-    border-left: 4px solid #ffcc00;
+    border-left: 4px solid #38bdf8;
 }
 
 .intro-section h2 {
-    color: #ffcc00;
+    color: #38bdf8;
     margin-bottom: 15px;
     font-size: 24px;
 }
@@ -576,10 +704,13 @@ a:focus, button:focus, select:focus {
 }
 
 .article-card {
-    background: rgba(0,0,0,0.3);
+    background: rgba(255, 255, 255, 0.05);
     padding: 20px;
     border-radius: 10px;
     transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .article-card:hover {
@@ -588,18 +719,81 @@ a:focus, button:focus, select:focus {
 }
 
 .article-card h4 {
-    color: #ffcc00;
+    color: #38bdf8;
     margin-bottom: 10px;
 }
 
 .article-card a {
     display: inline-block;
     margin-top: 15px;
-    color: #ffcc00;
+    color: #38bdf8;
     text-decoration: none;
     font-weight: bold;
 }
 
 .article-card a:hover {
     text-decoration: underline;
+}
+
+/* 添加玻璃态效果 */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+}
+
+/* 更新 FAQ 部分样式 */
+.faq-section {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 30px;
+    margin: 40px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-section h2 {
+    color: #38bdf8;
+    margin-bottom: 30px;
+}
+
+.faq-section h3 {
+    color: #e2e8f0;
+    margin: 20px 0 10px;
+}
+
+.faq-section p {
+    color: #94a3b8;
+    line-height: 1.8;
+}
+
+/* 更新介绍部分样式 */
+.intro-section {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 4px solid #38bdf8;
+}
+
+.intro-section h2 {
+    color: #38bdf8;
+}
+
+/* 添加玻璃态效果 */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .container {
+        padding: 15px;
+    }
 } 

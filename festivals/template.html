@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{FESTIVAL_NAME}} - Global Festivals Explorer</title>
+    <meta name="description" content="Learn about {{FESTIVAL_NAME}} in {{COUNTRY_NAME}}, including its history, traditions, dates, and cultural significance.">
+    <link rel="canonical" href="https://www.covertsonline.com/festivals/{{FESTIVAL_SLUG}}.html">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/festival-detail.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="main-nav">
+                <a href="../index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Globe
+                </a>
+            </nav>
+            <h1>{{FESTIVAL_NAME}}</h1>
+            <p class="festival-subtitle">{{COUNTRY_NAME}}</p>
+        </header>
+
+        <div class="festival-hero">
+            <img src="https://picsum.photos/id/{{IMAGE_ID}}/1200/600" alt="{{FESTIVAL_NAME}} celebration" class="hero-image">
+            <div class="festival-meta">
+                <div class="meta-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div>
+                        <span class="meta-label">Date</span>
+                        <span class="meta-value">{{FESTIVAL_DATE}}</span>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <span class="meta-label">Location</span>
+                        <span class="meta-value">{{LOCATION}}</span>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-tag"></i>
+                    <div>
+                        <span class="meta-label">Category</span>
+                        <span class="meta-value">{{CATEGORY}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="festival-content">
+            <section class="festival-overview">
+                <h2>About {{FESTIVAL_NAME}}</h2>
+                <p>{{OVERVIEW_TEXT}}</p>
+                <p>{{OVERVIEW_TEXT_2}}</p>
+            </section>
+
+            <section class="festival-details">
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <h3><i class="fas fa-history"></i> History & Origins</h3>
+                        <p>{{HISTORY_TEXT}}</p>
+                        <p>{{HISTORY_TEXT_2}}</p>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h3><i class="fas fa-star"></i> Traditions & Celebrations</h3>
+                        <p>{{TRADITIONS_TEXT}}</p>
+                        <p>{{TRADITIONS_TEXT_2}}</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="festival-tips">
+                <h2>Tips for Visitors</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Best Time to Visit</h3>
+                        <p>{{BEST_TIME}}</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-map-signs"></i>
+                        <h3>Key Locations</h3>
+                        <p>{{KEY_LOCATIONS}}</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Traditional Foods</h3>
+                        <p>{{TRADITIONAL_FOODS}}</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-info-circle"></i>
+                        <h3>Local Customs</h3>
+                        <p>{{LOCAL_CUSTOMS}}</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="related-festivals">
+                <h2>Related Festivals</h2>
+                <div class="related-grid">
+                    {{RELATED_FESTIVALS}}
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Global Festivals</h3>
+                    <p>Our interactive 3D globe allows you to explore cultural celebrations and festivals from countries around the world. Discover the rich traditions, dates, and significance of global festivities.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Popular Festivals</h3>
+                    <ul>
+                        <li><a href="../festivals/chinese-spring-festival.html">Chinese Spring Festival</a></li>
+                        <li><a href="../festivals/diwali.html">Indian Diwali</a></li>
+                        <li><a href="../festivals/rio-carnival.html">Rio Carnival</a></li>
+                        <li><a href="../festivals/day-of-the-dead.html">Day of the Dead</a></li>
+                        <li><a href="../festivals/hanami.html">Japanese Cherry Blossom Festival</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Explore By Region</h3>
+                    <ul>
+                        <li><a href="../index.html#asia">Asian Festivals</a></li>
+                        <li><a href="../index.html#europe">European Celebrations</a></li>
+                        <li><a href="../index.html#africa">African Cultural Events</a></li>
+                        <li><a href="../index.html#north-america">North American Holidays</a></li>
+                        <li><a href="../index.html#south-america">South American Traditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CoverstsOnline.com - All Rights Reserved</p>
+                <p>
+                    <a href="../about.html">About</a> | 
+                    <a href="../contact.html">Contact</a> | 
+                    <a href="../privacy-policy.html">Privacy Policy</a> | 
+                    <a href="../terms-of-service.html">Terms of Service</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
