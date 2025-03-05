@@ -6,9 +6,12 @@
     <title>Chinese Spring Festival - Global Festivals Explorer</title>
     <meta name="description" content="Learn about Chinese Spring Festival (Chinese New Year), including its history, traditions, dates, and cultural significance.">
     <link rel="canonical" href="https://www.covertsonline.com/festivals/chinese-spring-festival.html">
+    <link rel="preload" href="../css/style.css" as="style">
+    <link rel="preload" href="../css/festival-detail.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style">
+    <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/festival-detail.css">
-    <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -24,7 +27,10 @@
         </header>
 
         <div class="festival-hero">
-            <img src="../assets/images/festivals/chinese-spring-festival/hero.jpg" alt="Chinese Spring Festival celebration" class="hero-image">
+            <img src="../assets/images/festivals/chinese-spring-festival/hero.jpg" 
+                 alt="Chinese Spring Festival celebration" 
+                 class="hero-image"
+                 loading="eager">
             <div class="festival-meta">
                 <div class="meta-item">
                     <i class="fas fa-calendar-alt"></i>
@@ -61,14 +67,14 @@
                 <div class="details-grid">
                     <div class="detail-card">
                         <h3><i class="fas fa-history"></i> History & Origins</h3>
-                        <p>The origins of Chinese Spring Festival date back more than 3,000 years to the Shang Dynasty (1600-1046 BCE). According to legend, there was a mythical beast called "Nian" that would come out on the eve of the new year to eat villagers and destroy their homes. People discovered that Nian was afraid of loud noises, bright lights, and the color red.</p>
-                        <p>To protect themselves, villagers would hang red lanterns and scrolls on their windows and doors, set off firecrackers, and stay up late with bright lights. These practices evolved into the modern Spring Festival traditions. Over time, the festival incorporated elements from various Chinese philosophies including Confucianism, Buddhism, and Taoism.</p>
+                        <p>The origins of Chinese Spring Festival date back more than 3,000 years to the Shang Dynasty (1600-1046 BCE). According to legend, there was a mythical beast called "Nian" that would come out on the eve of the new year to eat villagers and destroy their homes. People discovered that Nian was afraid of loud noises, bright lights, and the color red, which is why these elements became central to the celebration.</p>
+                        <p>Over the centuries, the festival evolved to incorporate various religious and cultural elements, including Confucian, Taoist, and Buddhist traditions. Today, while many of the religious aspects have diminished, the cultural significance and family-oriented nature of the festival remain stronger than ever.</p>
                     </div>
                     
                     <div class="detail-card">
                         <h3><i class="fas fa-star"></i> Traditions & Celebrations</h3>
-                        <p>Chinese Spring Festival is rich with traditions that have been passed down through generations. The celebration begins with a thorough cleaning of homes to sweep away bad luck, followed by decorating with red paper-cuts, couplets, and lanterns. Red envelopes (hongbao) containing money are given to children and unmarried adults for good luck.</p>
-                        <p>The New Year's Eve reunion dinner is perhaps the most important part of the festival, where extended families gather for a feast featuring symbolic foods like fish (representing abundance), dumplings (wealth), and glutinous rice cakes (higher income or position). The celebrations continue with dragon and lion dances, temple fairs, and fireworks displays.</p>
+                        <p>The New Year's Eve reunion dinner is perhaps the most important part of the festival, where extended families gather for a feast featuring symbolic foods like fish (representing abundance), dumplings (wealth), and glutinous rice cakes (higher income or position). The celebration continues with the giving of red envelopes (hongbao) containing money to children and unmarried adults, symbolizing good luck and prosperity.</p>
+                        <p>Other significant traditions include thoroughly cleaning homes to sweep away bad luck, decorating with red paper-cuts and couplets, setting off firecrackers to scare away evil spirits, and watching lion and dragon dances. Many cities also host temple fairs featuring traditional performances, games, and local delicacies.</p>
                     </div>
                 </div>
             </section>
@@ -135,7 +141,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>About Global Festivals</h3>
+                    <h3>About Global Festivals Explorer</h3>
                     <p>Our interactive 3D globe allows you to explore cultural celebrations and festivals from countries around the world. Discover the rich traditions, dates, and significance of global festivities.</p>
                 </div>
                 
@@ -163,7 +169,7 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 CoverstsOnline.com - All Rights Reserved</p>
+                <p>&copy; 2023 Global Festivals Explorer - All Rights Reserved</p>
                 <p>
                     <a href="../about.html">About</a> | 
                     <a href="../contact.html">Contact</a> | 
@@ -173,5 +179,15 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // 页面加载完成后移除加载指示器
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                loader.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html> 

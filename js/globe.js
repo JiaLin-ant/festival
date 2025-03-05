@@ -781,32 +781,75 @@ class Globe {
     
     // 显示国家节日信息
     showCountryFestivals(country) {
-        console.log('Showing festivals for country:', country);
-        
-        // 获取元素
         const infoPanel = document.getElementById('festival-info');
-        const titleElement = document.getElementById('festival-title');
-        const dateElement = document.getElementById('festival-date');
-        const locationElement = document.getElementById('festival-location');
-        const categoryElement = document.getElementById('festival-category');
-        const descriptionElement = document.getElementById('festival-description');
         
-        // 设置内容
-        titleElement.textContent = `Major Festivals in ${country.name}`;
-        dateElement.textContent = '';
-        locationElement.textContent = `Location: Longitude ${country.center.lon.toFixed(2)}, Latitude ${country.center.lat.toFixed(2)}`;
-        categoryElement.textContent = '';
+        // 获取国家节日数据
+        const countryData = typeof country === 'string' ? this.countries[country] : country;
+        const countryName = typeof country === 'string' ? country : country.name;
         
-        // 显示所有节日
-        let festivalsList = '';
-        country.festivals.forEach(festival => {
-            festivalsList += `<strong>${festival.name}</strong> (${festival.date}): ${festival.description}<br><br>`;
+        if (!countryData || !countryData.festivals || countryData.festivals.length === 0) {
+            console.error(`No festival data found for ${countryName}`);
+            return;
+        }
+        
+        // 构建节日列表HTML
+        let festivalsHTML = '';
+        countryData.festivals.forEach(festival => {
+            // 创建 slug 用于链接
+            let festivalSlug = festival.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+            
+            // 特殊处理某些节日的文件名
+            const specialFestivals = {
+                'spring-festival': 'chinese-spring-festival',
+                'diwali': 'diwali',
+                'carnival': 'rio-carnival'
+            };
+            
+            if (specialFestivals[festivalSlug]) {
+                festivalSlug = specialFestivals[festivalSlug];
+            }
+            
+            festivalsHTML += `
+                <div class="festival-item">
+                    <h3>${festival.name}</h3>
+                    <div class="festival-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>${festival.date || 'Various dates'}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tag"></i>
+                            <span>${festival.category || 'Cultural'}</span>
+                        </div>
+                    </div>
+                    <p>${festival.description}</p>
+                    <div class="festival-actions">
+                        <a href="festivals/${festivalSlug}.html" class="detail-link">
+                            <i class="fas fa-external-link-alt"></i> View Full Details
+                        </a>
+                    </div>
+                </div>
+            `;
         });
         
-        descriptionElement.innerHTML = festivalsList;
+        // 更新信息面板内容
+        infoPanel.innerHTML = `
+            <div>
+                <button id="close-info">&times;</button>
+                <h2>${countryName} Festivals</h2>
+                <div class="festivals-list">
+                    ${festivalsHTML}
+                </div>
+            </div>
+        `;
         
-        // 显示面板
+        // 显示信息面板
         infoPanel.classList.remove('hidden');
+        
+        // 添加关闭按钮事件
+        document.getElementById('close-info').addEventListener('click', () => {
+            infoPanel.classList.add('hidden');
+        });
     }
     
     // 显示节日信息
@@ -1214,8 +1257,22 @@ class Globe {
 
     // 修改标记点击事件，直接跳转到详情页面
     onMarkerClick(marker, festival) {
+        // 显示加载指示器
+        this.showLoadingIndicator();
+        
         // 创建 slug 用于链接
-        const festivalSlug = festival.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+        let festivalSlug = festival.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+        
+        // 特殊处理某些节日的文件名
+        const specialFestivals = {
+            'spring-festival': 'chinese-spring-festival',
+            'diwali': 'diwali',
+            'carnival': 'rio-carnival'
+        };
+        
+        if (specialFestivals[festivalSlug]) {
+            festivalSlug = specialFestivals[festivalSlug];
+        }
         
         // 直接跳转到详情页面
         window.location.href = `festivals/${festivalSlug}.html`;
@@ -1255,6 +1312,9 @@ class Globe {
 
     // 添加一个直接跳转到节日详情页的方法
     showFestivalDetails(festivalName, countryName) {
+        // 显示加载指示器
+        this.showLoadingIndicator();
+        
         // 在所有国家中查找指定的节日
         let festival = null;
         
@@ -1278,10 +1338,94 @@ class Globe {
         
         if (festival) {
             // 创建 slug 用于链接
-            const festivalSlug = festival.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+            let festivalSlug = festival.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+            
+            // 特殊处理某些节日的文件名
+            const specialFestivals = {
+                'spring-festival': 'chinese-spring-festival',
+                'diwali': 'diwali',
+                'carnival': 'rio-carnival'
+            };
+            
+            if (specialFestivals[festivalSlug]) {
+                festivalSlug = specialFestivals[festivalSlug];
+            }
             
             // 直接跳转到详情页面
             window.location.href = `festivals/${festivalSlug}.html`;
+        }
+    }
+
+    // 添加显示加载指示器的方法
+    showLoadingIndicator() {
+        // 检查是否已存在加载指示器
+        let loader = document.getElementById('page-loader');
+        
+        if (!loader) {
+            // 创建加载指示器
+            loader = document.createElement('div');
+            loader.id = 'page-loader';
+            loader.innerHTML = `
+                <div class="loader-content">
+                    <div class="spinner"></div>
+                    <p>Loading festival details...</p>
+                </div>
+            `;
+            
+            // 添加样式
+            loader.style.position = 'fixed';
+            loader.style.top = '0';
+            loader.style.left = '0';
+            loader.style.width = '100%';
+            loader.style.height = '100%';
+            loader.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            loader.style.display = 'flex';
+            loader.style.justifyContent = 'center';
+            loader.style.alignItems = 'center';
+            loader.style.zIndex = '9999';
+            
+            // 添加到文档
+            document.body.appendChild(loader);
+        } else {
+            // 显示已存在的加载指示器
+            loader.style.display = 'flex';
+        }
+    }
+
+    // 修改 showCountryFestival 方法中的链接生成逻辑
+    showCountryFestival(countryName, festivalName) {
+        // 查找国家数据
+        const country = this.countries[countryName];
+        if (!country || !country.festivals) {
+            console.error(`No festival data found for ${countryName}`);
+            return;
+        }
+        
+        // 查找特定节日
+        const festival = country.festivals.find(f => 
+            f.name.toLowerCase() === festivalName.toLowerCase()
+        );
+        
+        if (festival) {
+            // 创建 slug 用于链接
+            let festivalSlug = festival.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+            
+            // 特殊处理某些节日的文件名
+            const specialFestivals = {
+                'spring-festival': 'chinese-spring-festival',
+                'diwali': 'diwali',
+                'carnival': 'rio-carnival'
+            };
+            
+            if (specialFestivals[festivalSlug]) {
+                festivalSlug = specialFestivals[festivalSlug];
+            }
+            
+            // 直接跳转到详情页面
+            window.location.href = `festivals/${festivalSlug}.html`;
+        } else {
+            // 如果找不到特定节日，显示该国家的所有节日
+            this.showCountryFestivals(countryName);
         }
     }
 }

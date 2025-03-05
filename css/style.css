@@ -796,4 +796,155 @@ a:focus, button:focus, select:focus {
     .container {
         padding: 15px;
     }
+}
+
+/* 添加页面过渡动画 */
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #121212;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.page-transition.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* 加载指示器样式 */
+#page-loader .spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #38bdf8;
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+#page-loader p {
+    color: white;
+    font-size: 16px;
+}
+
+/* 美化链接按钮样式 */
+.footer-section button,
+.footer-section a {
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin: 5px 0;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.footer-section button:hover,
+.footer-section a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #0ea5e9, #6366f1);
+}
+
+/* 详情链接样式 */
+.detail-link {
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.detail-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #0ea5e9, #6366f1);
+}
+
+.detail-link i {
+    margin-right: 5px;
+}
+
+/* 节日项目样式 */
+.festival-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.festival-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.festival-item h3 {
+    color: #38bdf8;
+    margin-bottom: 10px;
+}
+
+.festival-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #94a3b8;
+}
+
+.festival-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 特定节日按钮样式 */
+.footer-section button[onclick*="Spring Festival"] {
+    background: linear-gradient(135deg, #f43f5e, #ec4899);
+}
+
+.footer-section button[onclick*="Spring Festival"]:hover {
+    background: linear-gradient(135deg, #e11d48, #db2777);
+}
+
+.footer-section a[href*="diwali"] {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.footer-section a[href*="diwali"]:hover {
+    background: linear-gradient(135deg, #d97706, #b45309);
+}
+
+.footer-section a[href*="carnival"] {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.footer-section a[href*="carnival"]:hover {
+    background: linear-gradient(135deg, #059669, #047857);
 } 

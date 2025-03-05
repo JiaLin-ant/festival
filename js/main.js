@@ -85,4 +85,30 @@ function updatePageTitle(country, festival) {
 function showFestivalInfo(country, festival) {
     // 现有代码...
     updatePageTitle(country, festival.name);
+}
+
+// 在页面加载完成后预加载常用节日页面
+window.addEventListener('load', () => {
+    // 等待主页面完全加载后再预加载
+    setTimeout(() => {
+        preloadFestivalPages();
+    }, 3000);
+});
+
+// 预加载常用节日页面
+function preloadFestivalPages() {
+    const pagesToPreload = [
+        'festivals/chinese-spring-festival.html',
+        'festivals/diwali.html',
+        'festivals/rio-carnival.html'
+    ];
+    
+    pagesToPreload.forEach(url => {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = url;
+        document.head.appendChild(link);
+        
+        console.log(`预加载页面: ${url}`);
+    });
 } 

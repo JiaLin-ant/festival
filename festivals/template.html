@@ -6,9 +6,12 @@
     <title>{{FESTIVAL_NAME}} - Global Festivals Explorer</title>
     <meta name="description" content="Learn about {{FESTIVAL_NAME}} in {{COUNTRY_NAME}}, including its history, traditions, dates, and cultural significance.">
     <link rel="canonical" href="https://www.covertsonline.com/festivals/{{FESTIVAL_SLUG}}.html">
+    <link rel="preload" href="../css/style.css" as="style">
+    <link rel="preload" href="../css/festival-detail.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style">
+    <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/festival-detail.css">
-    <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -24,7 +27,13 @@
         </header>
 
         <div class="festival-hero">
-            <img src="https://picsum.photos/id/{{IMAGE_ID}}/1200/600" alt="{{FESTIVAL_NAME}} celebration" class="hero-image">
+            <img src="../assets/images/festivals/{{FESTIVAL_SLUG}}/hero.jpg"
+                 srcset="../assets/images/festivals/{{FESTIVAL_SLUG}}/hero-small.jpg 600w,
+                         ../assets/images/festivals/{{FESTIVAL_SLUG}}/hero.jpg 1200w"
+                 sizes="(max-width: 600px) 100vw, 1200px"
+                 alt="{{FESTIVAL_NAME}} celebration" 
+                 class="hero-image"
+                 loading="eager">
             <div class="festival-meta">
                 <div class="meta-item">
                     <i class="fas fa-calendar-alt"></i>
